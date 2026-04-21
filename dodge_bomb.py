@@ -1,6 +1,7 @@
 import os
 import sys
 import random
+import time
 import pygame as pg
 
 
@@ -49,13 +50,13 @@ def game_over(screen: pg.Surface) -> None:
 
     screen.blit(back_img, [0, 0])
     pg.display.update()
-    
-    pg.time.wait(5000)
+
+    time.sleep(5)#修正#1
+   
+   
 
 def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
-    """
-    移動方向に回転・反転
-    """
+    #移動方向に回転・反転
     kk_img0 = pg.image.load("fig/3.png")
     kk_img_flip = pg.transform.flip(kk_img0, True, False)
     
@@ -87,6 +88,7 @@ def main():
     bb_rct.centery = random.randint(0, HEIGHT)
     bb_img.set_colorkey((0, 0, 0))
     vx, vy = +5, +5
+
     #演習3
     kk_imgs = get_kk_imgs()
     kk_img = kk_imgs[(0, 0)]
