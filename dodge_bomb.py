@@ -9,7 +9,7 @@ DELTA = {
     pg.K_UP: (0 , -5),  # 上
     pg.K_DOWN: (0 , +5),  # 下
     pg.K_LEFT: (-5, 0),  # 左
-    pg.K_RIGHT: (+5, 0),  # 右
+    pg.K_RIGHT: (+5, 0),  # 右,
 }
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,7 +41,7 @@ def main():
     bb_rct = bb_img.get_rect()  # 爆弾Rectを取得する
     bb_rct.centerx = random.randint(0, WIDTH)  # 爆弾の初期横座標を設定する
     bb_rct.centery = random.randint(0, HEIGHT)  # 爆弾の初期縦座標を設定する
-    vx, vy = +5, +5  # 爆弾の速度
+    vx, vy = +10, +10 # 爆弾の速度,10
 
     clock = pg.time.Clock()
     tmr = 0
@@ -49,6 +49,10 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
+            
+        if kk_rct.colliderect(bb_rct):
+            print("ゲームオーバー")  # こうかとんと爆弾が重なったら
+            return
         screen.blit(bg_img, [0, 0]) 
 
         key_lst = pg.key.get_pressed()
